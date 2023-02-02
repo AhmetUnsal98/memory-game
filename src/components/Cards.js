@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "../scss/Cards.scss";
 
@@ -24,7 +24,19 @@ const Cards = () => {
     ].sort(() => Math.random() - 0.5)
   );
   const [prev, setPrev] = useState(-1);
-  const [totalPoint, setTotal] = useState(0);
+  const [finish, setFinished] = useState();
+  useEffect(() => {
+    items.map((item) => {
+      if (item.stat !== "correct") {
+        setFinished(0);
+      } else {
+        setFinished(1);
+      }
+    });
+    if (finish === 1) {
+      alert("Bitiridin! Melike Seni SEVİYORUM...");
+    }
+  });
 
   const check = (current) => {
     if (items[current].id === items[prev].id) {
@@ -32,7 +44,6 @@ const Cards = () => {
       items[prev].stat = "correct";
       setItems([...items]);
       setPrev(-1);
-      setTotal(totalPoint + 1);
     } else {
       items[current].stat = "wrong";
       items[prev].stat = "wrong";
@@ -46,11 +57,6 @@ const Cards = () => {
     }
   };
   const handleClick = (id) => {
-    if (totalPoint === 8) {
-      alert("Melike Seni Seviyorum <3 ");
-      totalPoint = 0;
-      window.location.reload(false);
-    }
     if (prev === -1) {
       items[id].stat = "active";
       setItems([...items]);
@@ -59,7 +65,7 @@ const Cards = () => {
       check(id);
     }
   };
-  console.log(totalPoint);
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Ahmet Ünsal Hafıza Oyunu</h1>
