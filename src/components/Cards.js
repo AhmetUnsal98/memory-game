@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "../scss/Cards.scss";
 
@@ -26,6 +26,12 @@ const Cards = () => {
   const [prev, setPrev] = useState(-1);
   const [totalPoint, setTotal] = useState(0);
 
+  useEffect(() => {
+    if (totalPoint >= 7) {
+      alert("Okay");
+    }
+  });
+
   const check = (current) => {
     if (items[current].id === items[prev].id) {
       items[current].stat = "correct";
@@ -46,11 +52,6 @@ const Cards = () => {
     }
   };
   const handleClick = (id) => {
-    if (totalPoint === 8) {
-      alert("Melike Seni Seviyorum <3 ");
-      totalPoint = 0;
-      window.location.reload(false);
-    }
     if (prev === -1) {
       items[id].stat = "active";
       setItems([...items]);
@@ -59,7 +60,7 @@ const Cards = () => {
       check(id);
     }
   };
-  console.log(totalPoint);
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>Ahmet Ünsal Hafıza Oyunu</h1>
