@@ -27,8 +27,8 @@ const Cards = () => {
   const [totalPoint, setTotal] = useState(0);
 
   useEffect(() => {
-    if (totalPoint >= 7) {
-      alert("Okay");
+    if (totalPoint > 7) {
+      alert("Bitirdin! Melike Seni Seviyorum <3");
     }
   });
 
