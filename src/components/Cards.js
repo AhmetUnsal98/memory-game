@@ -24,13 +24,6 @@ const Cards = () => {
     ].sort(() => Math.random() - 0.5)
   );
   const [prev, setPrev] = useState(-1);
-  const [totalPoint, setTotal] = useState(0);
-
-  useEffect(() => {
-    if (totalPoint > 7) {
-      alert("Bitirdin! Melike Seni Seviyorum <3");
-    }
-  });
 
   const check = (current) => {
     if (items[current].id === items[prev].id) {
